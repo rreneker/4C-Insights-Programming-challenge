@@ -58,3 +58,11 @@ class TestCases(unittest.TestCase):
 
         self.assertEqual(list([False,True]),result)
 
+    def test_test4(self):
+        queries = ((0,5),(17,19),(0,0),(19,3),(0,0),(95,82))
+        grid = list()
+        for i in range(0,100):
+            grid.append([1]*100)
+        result = Robert_Reneker_solve.path_exists(grid,queries)
+        self.assertEqual(list([True,True,True]),result)
+

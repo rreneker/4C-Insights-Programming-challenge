@@ -1,37 +1,39 @@
 def initialize_visited_grid(height,width):
-    
+    #initializes a grid that tells us if a spot in the actual grid has been visited yet
     result = list()
     for i in range(0,height):
         result.append([False]*width) 
     return result
 
 def move(direction,currX,currY,path,grid,visited_grid):
+    #takes care of the steps needed to move from one spot to the next
     if direction == "Up":
         currX = currX-1
-        print("Up")
+        #print("Up")
     elif direction == "Right":
         currY = currY+1
-        print("Right")
+        #print("Right")
     elif direction == "Left":
         currY = currY-1
-        print("Left")
+        #print("Left")
     elif direction == "Down":
         currX = currX+1
-        print("Down")
+        #print("Down")
     else:
-        print("OOPS")
+        #print("OOPS")
         return
     path.append((currX,currY))
     visited_grid[currX][currY] = True
     return currX,currY
 def go_back(path):
+    #Moves back one space 
     path.pop()
     if(len(path) == 0):
         return -1,-1
     else:
         currX = path[-1][0]
         currY = path[-1][1]
-        print("No New nodes")
+        #print("No New nodes")
         return currX, currY
 
 def path_exists(grid, queries):
@@ -156,22 +158,4 @@ def path_exists(grid, queries):
                 result.append(False)
             else:    
                 result.append(True)
-
-    # TODO: Implement me!
     return result
-
-queries = ((0,0),(4,3))
-
-grid = list()
-# for i in range(0,5):
-#     grid.append(list())
-#     for j in range(0,5):
-#         grid[i].append(1)
-grid.append([1,0,0,1,0])
-grid.append([1,1,1,0,1])
-grid.append([1,0,0,1,0])
-grid.append([1,0,0,0,1])
-grid.append([1,1,1,1,0])
-
-result = path_exists(grid,queries)
-print(result)
