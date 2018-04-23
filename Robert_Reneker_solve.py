@@ -24,6 +24,15 @@ def move(direction,currX,currY,path,grid,visited_grid):
     path.append((currX,currY))
     visited_grid[currX][currY] = True
     return currX,currY
+def go_back(path):
+    path.pop()
+    if(len(path) == 0):
+        return -1,-1
+    else:
+        currX = path[-1][0]
+        currY = path[-1][1]
+        print("No New nodes")
+        return currX, currY
 
 def path_exists(grid, queries):
     result = list()
@@ -44,7 +53,7 @@ def path_exists(grid, queries):
             path = list()
             path.append((currX,currY))
             visited_grid[startX][startY] = True
-            while (currX != endX or currY != endY) and path.count > 0:
+            while (currX != endX or currY != endY) and len(path) > 0:
                 diffX = currX - endX
                 diffY = currY - endY
                 if diffX >= 0 and diffY >= 0:
@@ -58,13 +67,7 @@ def path_exists(grid, queries):
                         elif (currX+1) < len(grid) and grid[currX+1][currY] == startVal and visited_grid[currX+1][currY] == False:
                             currX,currY = move("Down",currX,currY,path,grid,visited_grid)
                         else:
-                            #print path
-                            path.pop()
-                            if(len(path) == 0):
-                                break
-                            currX = path[-1][0]
-                            currY = path[-1][1]
-                            print("No New nodes")
+                            currX,currY = go_back(path)
                     else:
                         if (currY-1) > -1 and grid[currX][currY-1] == startVal and visited_grid[currX][currY-1] == False:
                             currX,currY = move("Left",currX,currY,path,grid,visited_grid)
@@ -75,13 +78,7 @@ def path_exists(grid, queries):
                         elif (currY+1) < len(grid[0]) and grid[currX][currY+1] == startVal and visited_grid[currX][currY+1] == False:
                             currX,currY = move("Right",currX,currY,path,grid,visited_grid)
                         else:
-                            #print path
-                            path.pop()
-                            if(len(path) == 0):
-                                break
-                            currX = path[-1][0]
-                            currY = path[-1][1]
-                            print("No New nodes")
+                            currX,currY = go_back(path)
 
                 elif diffX < 0 and diffY >= 0:
                     if abs(diffX) >= abs(diffY):
@@ -94,13 +91,7 @@ def path_exists(grid, queries):
                         elif (currX-1) > -1 and grid[currX-1][currY] == startVal and visited_grid[currX-1][currY] == False:
                             currX,currY = move("Up",currX,currY,path,grid,visited_grid)
                         else:
-                            #print path
-                            path.pop()
-                            if(len(path) == 0):
-                                break
-                            currX = path[-1][0]
-                            currY = path[-1][1]
-                            print("No New nodes")
+                            currX,currY = go_back(path)
                     else:
                         
                         if (currY-1) > -1 and grid[currX][currY-1] == startVal and visited_grid[currX][currY-1] == False:
@@ -112,13 +103,7 @@ def path_exists(grid, queries):
                         elif (currY+1) < len(grid[0]) and grid[currX][currY+1] == startVal and visited_grid[currX][currY+1] == False:
                             currX,currY = move("Right",currX,currY,path,grid,visited_grid)
                         else:
-                            #print path
-                            path.pop()
-                            if(len(path) == 0):
-                                break
-                            currX = path[-1][0]
-                            currY = path[-1][1]
-                            print("No New nodes")
+                            currX,currY = go_back(path)
                 elif diffX < 0 and diffY < 0:
                     if abs(diffX) >= abs(diffY):
                         if (currX+1) < len(grid) and grid[currX+1][currY] == startVal and visited_grid[currX+1][currY] == False:
@@ -130,13 +115,7 @@ def path_exists(grid, queries):
                         elif (currX-1) > -1 and grid[currX-1][currY] == startVal and visited_grid[currX-1][currY] == False:
                             currX,currY = move("Up",currX,currY,path,grid,visited_grid)
                         else:
-                            #print path
-                            path.pop()
-                            if(len(path) == 0):
-                                break
-                            currX = path[-1][0]
-                            currY = path[-1][1]
-                            print("No New nodes")
+                            currX,currY = go_back(path)
                     else:
                         if (currY+1) < len(grid[0]) and grid[currX][currY+1] == startVal and visited_grid[currX][currY+1] == False:
                             currX,currY = move("Right",currX,currY,path,grid,visited_grid)
@@ -147,13 +126,7 @@ def path_exists(grid, queries):
                         elif (currY-1) > -1 and grid[currX][currY-1] == startVal and visited_grid[currX][currY-1] == False:
                             currX,currY = move("Left",currX,currY,path,grid,visited_grid)
                         else:
-                            #print path
-                            path.pop()
-                            if(len(path) == 0):
-                                break
-                            currX = path[-1][0]
-                            currY = path[-1][1]
-                            print("No New nodes")
+                           currX,currY = go_back(path)
 
                 elif diffX >= 0 and diffY < 0:
                     if diffX >= abs(diffY):
@@ -166,13 +139,7 @@ def path_exists(grid, queries):
                         elif (currX+1) < len(grid) and grid[currX+1][currY] == startVal and visited_grid[currX+1][currY] == False:
                             currX,currY = move("Down",currX,currY,path,grid,visited_grid)
                         else:
-                            #print path
-                            path.pop()
-                            if(len(path) == 0):
-                                break
-                            currX = path[-1][0]
-                            currY = path[-1][1]
-                            print("No New nodes")
+                            currX,currY = go_back(path)
                     else:
                         if (currY+1) < len(grid[0]) and grid[currX][currY+1] == startVal and visited_grid[currX][currY+1] == False:
                             currX,currY = move("Right",currX,currY,path,grid,visited_grid)
@@ -183,13 +150,7 @@ def path_exists(grid, queries):
                         elif (currY-1) > -1 and grid[currX][currY-1] == startVal and visited_grid[currX][currY-1] == False:
                             currX,currY = move("Left",currX,currY,path,grid,visited_grid)
                         else:
-                            #print path
-                            path.pop()
-                            if(len(path) == 0):
-                                break
-                            currX = path[-1][0]
-                            currY = path[-1][1]
-                            print("No New nodes")
+                           currX,currY = go_back(path)
             #print(path)
             if(len(path) == 0):
                 result.append(False)
