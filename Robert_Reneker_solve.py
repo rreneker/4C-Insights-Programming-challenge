@@ -5,6 +5,25 @@ def initialize_visited_grid(height,width):
         result.append([False]*width) 
     return result
 
+def move(direction,currX,currY,path,grid,visited_grid):
+    if direction == "Up":
+        currX = currX-1
+        print("Up")
+    elif direction == "Right":
+        currY = currY+1
+        print("Right")
+    elif direction == "Left":
+        currY = currY-1
+        print("Left")
+    elif direction == "Down":
+        currX = currX+1
+        print("Down")
+    else:
+        print("OOPS")
+        return
+    path.append((currX,currY))
+    visited_grid[currX][currY] = True
+    return currX,currY
 
 def path_exists(grid, queries):
     result = list()
@@ -27,25 +46,13 @@ def path_exists(grid, queries):
             visited_grid[startX][startY] = True
             while (currX != endX or currY != endY) and path.count > 0:
                 if (currX-1) > -1 and grid[currX-1][currY] == startVal and visited_grid[currX-1][currY] == False:
-                    currX = currX-1
-                    path.append((currX,currY))
-                    visited_grid[currX][currY] = True
-                    print("Up")
+                    currX,currY = move("Up",currX,currY,path,grid,visited_grid)
                 elif (currY+1) < len(grid[0]) and grid[currX][currY+1] == startVal and visited_grid[currX][currY+1] == False:
-                    currY = currY+1
-                    path.append((currX,currY))
-                    visited_grid[currX][currY] = True
-                    print("Right")
+                    currX,currY = move("Right",currX,currY,path,grid,visited_grid)
                 elif (currY-1) > -1 and grid[currX][currY-1] == startVal and visited_grid[currX][currY-1] == False:
-                    currY = currY-1
-                    path.append((currX,currY))
-                    visited_grid[currX][currY] = True
-                    print("Left")
+                    currX,currY = move("Left",currX,currY,path,grid,visited_grid)
                 elif (currX+1) < len(grid) and grid[currX+1][currY] == startVal and visited_grid[currX+1][currY] == False:
-                    currX = currX+1
-                    path.append((currX,currY))
-                    visited_grid[currX][currY] = True
-                    print("Down")
+                    currX,currY = move("Down",currX,currY,path,grid,visited_grid)
                 else:
                     #print path
                     path.pop()
